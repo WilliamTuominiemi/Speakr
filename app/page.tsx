@@ -6,7 +6,20 @@ import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtil
 export default function Home() {
   const [audioURL, setAudioURL] = useState<string | null>(null);
 
+  const sendTestToDB = async () => {
+    try {
+      const response = await fetch('/api/test', {
+        method: 'POST',
+      });
+      const data = await response.json();
+      console.log('Data from server:', data);
+    } catch (error) {
+      console.error('Error fetching:', error);
+    }
+  };
+
   useEffect(() => {
+    sendTestToDB();
     getLocalStream();
   }, []);
 
