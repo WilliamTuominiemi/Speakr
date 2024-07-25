@@ -34,11 +34,12 @@ export const startRecording = () => {
 };
 
 export const stopRecording = () => {
-  return new Promise<Blob>((resolve, reject) => {
+  return new Promise<string>((resolve, reject) => {
     if (mediaRecorder) {
-      mediaRecorder.onstop = () => {
+      mediaRecorder.onstop = async () => {
         const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-        resolve(audioBlob);
+        const base64String = await convertBlobToBase64(audioBlob);
+        resolve(base64String);
       };
       mediaRecorder.stop();
       console.log('Recording stopped');

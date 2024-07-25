@@ -4,22 +4,9 @@ import { useEffect, useState } from 'react';
 import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtils';
 
 export default function Home() {
-  const [audioURL, setAudioURL] = useState<string | null>(null);
-
-  const sendTestToDB = async () => {
-    try {
-      const response = await fetch('/api/test', {
-        method: 'POST',
-      });
-      const data = await response.json();
-      console.log('Data from server:', data);
-    } catch (error) {
-      console.error('Error fetching:', error);
-    }
-  };
+  const [audio, setAudio] = useState<string | null>(null);
 
   useEffect(() => {
-    sendTestToDB();
     getLocalStream();
   }, []);
 
@@ -28,9 +15,20 @@ export default function Home() {
   };
 
   const handleStopRecording = async () => {
-    const audioBlob = await stopRecording();
-    const url = URL.createObjectURL(audioBlob);
-    setAudioURL(url);
+    const base64Audio = await stopRecording();
+    setAudio(base64Audio);
+    console.log('Base64 Audio String:', base64Audio);
+  };
+
+  const uploadSound = async () => {
+    try {
+      const response = await fetch('/api/test', {
+        method: 'POST',
+        body: JSON.stringify({ audio }),
+      });
+    } catch (error) {
+      console.error('Error fetching:', error);
+    }
   };
 
   return (
@@ -40,9 +38,12 @@ export default function Home() {
         <button onClick={handleStartRecording}>Start Recording</button>
         <button onClick={handleStopRecording}>Stop Recording</button>
       </div>
-      {audioURL && (
+      {audio && (
         <div>
-          <audio src={audioURL} controls />
+          <audio src={audio} controls />
+          <button type="button" onClick={uploadSound}>
+            Upload
+          </button>
         </div>
       )}
     </main>

@@ -3,9 +3,11 @@ const prisma = new PrismaClient();
 
 export const POST = async (req, res) => {
   try {
+    const { audio } = await req.json();
+
     const testData = await prisma.post.create({
       data: {
-        msg: 'msg',
+        msg: audio,
       },
     });
 
