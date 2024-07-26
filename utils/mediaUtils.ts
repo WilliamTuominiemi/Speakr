@@ -1,7 +1,7 @@
 let mediaRecorder: MediaRecorder;
 let audioChunks: Blob[] = [];
 
-export const getLocalStream = () => {
+export const getLocalStream = (setError: (error: string) => void) => {
   navigator.mediaDevices
     .getUserMedia({ video: false, audio: true })
     .then((stream) => {
@@ -20,6 +20,7 @@ export const getLocalStream = () => {
     })
     .catch((err) => {
       console.error(`you got an error: ${err}`);
+      setError('No audio device detected or access denied. Please check your microphone settings.');
     });
 };
 

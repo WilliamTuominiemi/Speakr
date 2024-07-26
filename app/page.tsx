@@ -13,8 +13,10 @@ export default function Home() {
 
   const [audios, setAudios] = useState<AudioData[] | null>(null);
 
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
-    getLocalStream();
+    getLocalStream(setError);
 
     const getAudios = async () => {
       try {
@@ -57,6 +59,8 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <p>Sound Thing</p>
+      {error && <p className="error-message">{error}</p>}
+
       {audios && (
         <div>
           {audios.map((audio) => (
