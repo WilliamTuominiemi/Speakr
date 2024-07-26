@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
+model Audio {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
-  msg   String
+  base64   String
 }

@@ -22,7 +22,7 @@ export default function Home() {
 
   const uploadSound = async () => {
     try {
-      const response = await fetch('/api/test', {
+      const response = await fetch('/api/new', {
         method: 'POST',
         body: JSON.stringify({ audio }),
       });
