@@ -19,7 +19,6 @@ export const getLocalStream = (setError: (error: string) => void) => {
       };
     })
     .catch((err) => {
-      console.error(`you got an error: ${err}`);
       setError('No audio device detected or access denied. Please check your microphone settings.');
     });
 };

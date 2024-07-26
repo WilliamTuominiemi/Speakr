@@ -29,7 +29,6 @@ export default function Home() {
         throw new Error('Failed to fetch audios');
       }
       const data: AudioData[] = await response.json();
-      console.log(data);
       setAudios(data);
     } catch (error) {
       console.error(error);
@@ -67,38 +66,61 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Speakr</h1>
-      {error && <p className="error-message">{error}</p>}
+    <main className="flex flex-col h-screen w-2/3 bg-gray-800 mx-auto relative ">
+      <div className="flex flex-col justify-center items-center flex-1 overflow-y-scroll">
+        <h1 className="text-white mb-4">🗣️ Speakr</h1>
+        <p className="text-white mb-4">What others have to say:</p>
 
-      <div>
-        <p>Speak: </p>
-        <button className="text-3xl" onClick={handleStartRecording} disabled={isRecording}>
-          ▶️
-        </button>
-        <button className="text-3xl" onClick={handleStopRecording} disabled={!isRecording}>
-          ⏹️
-        </button>
+        {audios && (
+          <div className="flex-1">
+            {audios.map((audio) => (
+              <div className="p-1" key={audio.id}>
+                <audio src={audio.base64} controls />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-      {audio && (
-        <div>
-          <audio src={audio} controls />
-          <button type="button" onClick={uploadSound}>
-            Upload
-          </button>
-        </div>
-      )}
 
-      {audios && (
-        <div>
-          <p>What others have to say:</p>
-          {audios.map((audio) => (
-            <div className="p-1" key={audio.id}>
-              <audio src={audio.base64} controls />
-            </div>
-          ))}
+      <div className="sticky bottom-0">
+        {error ? (
+          <p className="error-message">{error}</p>
+        ) : (
+          <div className="bg-gray-600 p-4 flex items-center space-x-2">
+            <p>Speak: </p>
+            <button
+              className="rounded-lg p-1 text-2xl bg-blue-500"
+              onClick={handleStartRecording}
+              disabled={isRecording}
+            >
+              🎙️
+            </button>
+            <button
+              className="rounded-lg p-1 text-2xl bg-blue-500"
+              onClick={handleStopRecording}
+              disabled={!isRecording}
+            >
+              🛑
+            </button>
+
+            {audio && (
+              <div className="flex items-center space-x-2">
+                <audio src={audio} controls />
+                <button className="rounded-lg p-1 text-md bg-blue-500" type="button" onClick={uploadSound}>
+                  Upload↗️
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className=" bg-gray-700 p-4 flex items-center justify-between">
+          <div className="flex items-center">
+            <span className="text-sm font-bold">William</span>
+          </div>
+          <button>⚙️</button>
         </div>
-      )}
+      </div>
     </main>
   );
 }
