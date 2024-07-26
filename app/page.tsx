@@ -3,11 +3,34 @@
 import { useEffect, useState } from 'react';
 import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtils';
 
+interface AudioData {
+  id: string;
+  base64: string;
+}
+
 export default function Home() {
   const [audio, setAudio] = useState<string | null>(null);
 
+  const [audios, setAudios] = useState<AudioData[] | null>(null);
+
   useEffect(() => {
     getLocalStream();
+
+    const getAudios = async () => {
+      try {
+        const response = await fetch('/api/audio');
+        if (!response.ok) {
+          throw new Error('Failed to fetch audios');
+        }
+        const data: AudioData[] = await response.json();
+        console.log(data);
+        setAudios(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getAudios();
   }, []);
 
   const handleStartRecording = () => {
@@ -34,6 +57,15 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <p>Sound Thing</p>
+      {audios && (
+        <div>
+          {audios.map((audio) => (
+            <div key={audio.id}>
+              <audio src={audio.base64} controls />
+            </div>
+          ))}
+        </div>
+      )}
       <div>
         <button onClick={handleStartRecording}>Start Recording</button>
         <button onClick={handleStopRecording}>Stop Recording</button>
