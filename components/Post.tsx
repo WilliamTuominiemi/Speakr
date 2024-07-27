@@ -19,7 +19,7 @@ const Post: React.FC<PostProps> = ({ base64 }) => {
 
       <div className="flex">
         <Player base64={base64} />
-        <button className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded">
+        <button className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded-md">
           <Image src="/icons/reply.svg" alt="Share" width={25} height={25} />
         </button>
       </div>

@@ -75,8 +75,8 @@ export default function Home() {
     <main className="flex flex-col h-screen w-2/3 bg-gray-800 mx-auto relative rounded-lg">
       <div className="flex flex-col justify-center items-center flex-1 overflow-y-auto scrollbar-thin">
         <div className="w-1/2">
-          <h1 className="text-white mb-4 pt-5">🗣️ Speakr</h1>
-          <p className="text-white mb-4">What others have to say:</p>
+          <h1 className="text-white text-3xl mb-4 pt-5">🗣️ Speakr</h1>
+          <p className="text-white text-lg mb-4">What others have to say:</p>
         </div>
 
         {audios && (
@@ -94,24 +94,24 @@ export default function Home() {
             <p className="error-message">{error}</p>
           ) : (
             <>
-              <p className="text-lg">Say something: </p>
+              <p className="text-xl">Say something: </p>
 
               {!isRecording ? (
                 <button
-                  className="rounded-sm p-2 h-full text-2xl bg-emerald-700"
+                  className="rounded-md p-3 h-full text-2xl bg-emerald-700"
                   onClick={handleStartRecording}
                   disabled={isRecording}
                 >
-                  <Image src="/icons/microphone.svg" alt="Record" width={12} height={12} />
+                  <Image src="/icons/microphone.svg" alt="Record" width={15} height={15} />
                 </button>
               ) : (
                 <>
                   <button
-                    className="rounded-sm p-2 h-full text-2xl bg-red-500"
+                    className="rounded-md p-3 h-full text-2xl bg-red-500"
                     onClick={handleStopRecording}
                     disabled={!isRecording}
                   >
-                    <Image src="/icons/microphone-line.svg" alt="Stop recording" width={12} height={12} />
+                    <Image src="/icons/microphone-line.svg" alt="Stop recording" width={15} height={15} />
                   </button>
                 </>
               )}
@@ -120,7 +120,7 @@ export default function Home() {
                 <>
                   <Player base64={audio} />
 
-                  <button className="rounded-sm p-2 h-full text-md bg-emerald-500" type="button" onClick={uploadSound}>
+                  <button className="rounded-md p-2 h-full text-md bg-emerald-500" type="button" onClick={uploadSound}>
                     <Image src="/icons/share.svg" alt="Share" width={15} height={15} />
                   </button>
                 </>
@@ -131,9 +131,9 @@ export default function Home() {
 
         <div className="bg-gray-700 p-4 flex items-center shadow-lg justify-between w-11/12 rounded-tl-xl rounded-br-lg">
           <div className="flex items-center">
-            <span className="text-lg font-bold">William</span>
+            <span className="text-2xl font-bold">William</span>
           </div>
-          <button>⚙️</button>
+          <button className="text-lg">⚙️</button>
         </div>
       </div>
     </main>
