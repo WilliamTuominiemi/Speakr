@@ -35,3 +35,23 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+/* styles/globals.css */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #4a5568 #2d3748;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #4a5568;
+  border-radius: 9999px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background-color: #2d3748;
+}
