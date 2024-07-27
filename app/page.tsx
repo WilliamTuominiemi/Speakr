@@ -12,6 +12,7 @@ import Post from '@/components/Post';
 interface AudioData {
   id: string;
   base64: string;
+  createdAt: string;
 }
 
 export default function Home() {
@@ -82,7 +83,7 @@ export default function Home() {
         {audios && (
           <div className="flex-1 w-1/2 overflow-y-auto">
             {audios.map((audio) => (
-              <Post key={audio.id} base64={audio.base64} />
+              <Post key={audio.id} base64={audio.base64} createdAt={audio.createdAt} />
             ))}
           </div>
         )}

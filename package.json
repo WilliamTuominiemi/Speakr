@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.17.0",
+    "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "next": "14.2.5",
     "pako": "^2.1.0",

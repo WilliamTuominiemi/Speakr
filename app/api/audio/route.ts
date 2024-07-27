@@ -4,7 +4,11 @@ const prisma = new PrismaClient();
 
 export const GET = async (req: NextRequest): Promise<NextResponse> => {
   try {
-    const audios = await prisma.audio.findMany();
+    const audios = await prisma.audio.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
 
     return new NextResponse(JSON.stringify(audios), { status: 200 });
   } catch (error) {

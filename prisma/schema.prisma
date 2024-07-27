@@ -8,6 +8,8 @@ datasource db {
 }
 
 model Audio {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  base64   String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  base64    String
+  createdAt DateTime @default(now())
 }
+
