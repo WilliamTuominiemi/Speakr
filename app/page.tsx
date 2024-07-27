@@ -72,7 +72,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col h-screen w-2/3 bg-gray-800 mx-auto relative">
+    <main className="flex flex-col h-screen w-2/3 bg-gray-800 mx-auto relative rounded-lg">
       <div className="flex flex-col justify-center items-center flex-1 overflow-y-auto">
         <div className="w-1/2">
           <h1 className="text-white mb-4 pt-5">🗣️ Speakr</h1>
@@ -129,7 +129,7 @@ export default function Home() {
           )}
         </div>
 
-        <div className="bg-gray-700 p-4 flex items-center shadow-lg justify-between w-11/12 rounded-tl-xl">
+        <div className="bg-gray-700 p-4 flex items-center shadow-lg justify-between w-11/12 rounded-tl-xl rounded-br-lg">
           <div className="flex items-center">
             <span className="text-lg font-bold">William</span>
           </div>
