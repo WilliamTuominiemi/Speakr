@@ -98,7 +98,7 @@ export default function Home() {
 
               {!isRecording ? (
                 <button
-                  className="rounded-md p-3 h-full text-2xl bg-emerald-700"
+                  className="rounded-md p-3 pl-4 pr-4 h-full text-2xl bg-emerald-700 hover:bg-emerald-800"
                   onClick={handleStartRecording}
                   disabled={isRecording}
                 >
@@ -107,7 +107,7 @@ export default function Home() {
               ) : (
                 <>
                   <button
-                    className="rounded-md p-3 h-full text-2xl bg-red-500"
+                    className="rounded-md p-3 pl-4 pr-4 h-full text-2xl bg-red-500 hover:bg-red-600"
                     onClick={handleStopRecording}
                     disabled={!isRecording}
                   >
@@ -120,7 +120,11 @@ export default function Home() {
                 <>
                   <Player base64={audio} />
 
-                  <button className="rounded-md p-2 h-full text-md bg-emerald-500" type="button" onClick={uploadSound}>
+                  <button
+                    className="rounded-md pl-4 pr-4 h-full text-md bg-teal-500 hover:bg-teal-600"
+                    type="button"
+                    onClick={uploadSound}
+                  >
                     <Image src="/icons/share.svg" alt="Share" width={15} height={15} />
                   </button>
                 </>
