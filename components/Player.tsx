@@ -22,10 +22,10 @@ const Player: React.FC<PlayerProps> = ({ base64 }) => {
   };
 
   return (
-    <div className=" h-full">
+    <div className="h-full mr-2">
       <audio ref={audioRef} src={base64} />
-      <button className=" bg-emerald-600 p-2 h-full rounded-sm " onClick={handlePlayPause}>
-        <Image src="/icons/play-pause.svg" alt="Stop" width={15} height={15} />
+      <button className=" bg-emerald-600 hover:bg-emerald-700 p-3 h-full rounded-md " onClick={handlePlayPause}>
+        <Image src="/icons/play-pause.svg" alt="Stop" width={25} height={25} />
       </button>
     </div>
   );

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtils';
 
 import Player from '@/components/Player';
+import Post from '@/components/Post';
 
 interface AudioData {
   id: string;
@@ -77,11 +78,9 @@ export default function Home() {
         <p className="text-white mb-4">What others have to say:</p>
 
         {audios && (
-          <div className="flex-1">
+          <div className="flex-1 w-1/2">
             {audios.map((audio) => (
-              <div className="p-1" key={audio.id}>
-                <Player base64={audio.base64} />
-              </div>
+              <Post key={audio.id} base64={audio.base64} />
             ))}
           </div>
         )}
