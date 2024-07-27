@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
+import Image from 'next/image';
+
 import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtils';
 
 import Player from '@/components/Player';
@@ -85,33 +88,39 @@ export default function Home() {
       </div>
 
       <div className="sticky bottom-0 flex flex-col items-end">
-        <div className="bg-gray-600 p-4 w-11/12 rounded-tl-xl flex items-center space-x-5">
+        <div className="bg-gray-600 p-4 w-9/12 rounded-tl-xl flex items-center space-x-5">
           {error ? (
             <p className="error-message">{error}</p>
           ) : (
             <>
-              <p>Speak: </p>
-              <button
-                className="rounded-lg p-1 text-2xl bg-blue-500"
-                onClick={handleStartRecording}
-                disabled={isRecording}
-              >
-                🎙️
-              </button>
-              <button
-                className="rounded-lg p-1 text-2xl bg-blue-500"
-                onClick={handleStopRecording}
-                disabled={!isRecording}
-              >
-                🛑
-              </button>
+              <p className="text-xs">Speak: </p>
+
+              {!isRecording ? (
+                <button
+                  className="rounded-sm p-2 h-full text-2xl bg-emerald-700"
+                  onClick={handleStartRecording}
+                  disabled={isRecording}
+                >
+                  <Image src="/icons/microphone.svg" alt="Record" width={12} height={12} />
+                </button>
+              ) : (
+                <>
+                  <button
+                    className="rounded-sm  p-2 h-full text-2xl bg-red-500"
+                    onClick={handleStopRecording}
+                    disabled={!isRecording}
+                  >
+                    <Image src="/icons/microphone-line.svg" alt="Stop recording" width={12} height={12} />
+                  </button>
+                </>
+              )}
 
               {audio && (
                 <>
                   <Player base64={audio} />
 
-                  <button className="rounded-lg p-1 text-md bg-blue-500" type="button" onClick={uploadSound}>
-                    Upload↗️
+                  <button className="rounded-sm p-2 h-full text-md  bg-emerald-500" type="button" onClick={uploadSound}>
+                    <Image src="/icons/share.svg" alt="Share" width={15} height={15} />
                   </button>
                 </>
               )}
@@ -119,7 +128,7 @@ export default function Home() {
           )}
         </div>
 
-        <div className=" bg-gray-700 p-4 flex items-center justify-between w-full">
+        <div className=" bg-gray-700 p-4 flex items-center justify-between w-11/12 rounded-tl-xl">
           <div className="flex items-center">
             <span className="text-sm font-bold">William</span>
           </div>

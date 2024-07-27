@@ -2,6 +2,8 @@
 
 import React, { useRef } from 'react';
 
+import Image from 'next/image';
+
 interface PlayerProps {
   base64: string;
 }
@@ -20,9 +22,11 @@ const Player: React.FC<PlayerProps> = ({ base64 }) => {
   };
 
   return (
-    <div>
+    <div className=" h-full">
       <audio ref={audioRef} src={base64} />
-      <button onClick={handlePlayPause}>⏯️</button>
+      <button className=" bg-emerald-600 p-2 h-full rounded-sm " onClick={handlePlayPause}>
+        <Image src="/icons/play-pause.svg" alt="Stop" width={15} height={15} />
+      </button>
     </div>
   );
 };
