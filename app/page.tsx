@@ -72,13 +72,15 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col h-screen w-2/3 bg-gray-800 mx-auto relative ">
-      <div className="flex flex-col justify-center items-center flex-1 overflow-y-scroll">
-        <h1 className="text-white mb-4 pt-14">🗣️ Speakr</h1>
-        <p className="text-white mb-4">What others have to say:</p>
+    <main className="flex flex-col h-screen w-2/3 bg-gray-800 mx-auto relative">
+      <div className="flex flex-col justify-center items-center flex-1 overflow-y-auto">
+        <div className="w-1/2">
+          <h1 className="text-white mb-4 pt-5">🗣️ Speakr</h1>
+          <p className="text-white mb-4">What others have to say:</p>
+        </div>
 
         {audios && (
-          <div className="flex-1 w-1/2">
+          <div className="flex-1 w-1/2 overflow-y-auto">
             {audios.map((audio) => (
               <Post key={audio.id} base64={audio.base64} />
             ))}
@@ -86,13 +88,13 @@ export default function Home() {
         )}
       </div>
 
-      <div className="sticky bottom-0 flex flex-col items-end">
-        <div className="bg-gray-600 p-4 w-9/12 rounded-tl-xl flex items-center space-x-5">
+      <div className="sticky bottom-0 w-full flex flex-col items-end">
+        <div className="bg-gray-600 p-4 w-10/12 rounded-tl-xl shadow-lg flex items-center space-x-5">
           {error ? (
             <p className="error-message">{error}</p>
           ) : (
             <>
-              <p className="text-xs">Speak: </p>
+              <p className="text-lg">Say something: </p>
 
               {!isRecording ? (
                 <button
@@ -105,7 +107,7 @@ export default function Home() {
               ) : (
                 <>
                   <button
-                    className="rounded-sm  p-2 h-full text-2xl bg-red-500"
+                    className="rounded-sm p-2 h-full text-2xl bg-red-500"
                     onClick={handleStopRecording}
                     disabled={!isRecording}
                   >
@@ -118,7 +120,7 @@ export default function Home() {
                 <>
                   <Player base64={audio} />
 
-                  <button className="rounded-sm p-2 h-full text-md  bg-emerald-500" type="button" onClick={uploadSound}>
+                  <button className="rounded-sm p-2 h-full text-md bg-emerald-500" type="button" onClick={uploadSound}>
                     <Image src="/icons/share.svg" alt="Share" width={15} height={15} />
                   </button>
                 </>
@@ -127,9 +129,9 @@ export default function Home() {
           )}
         </div>
 
-        <div className=" bg-gray-700 p-4 flex items-center justify-between w-11/12 rounded-tl-xl">
+        <div className="bg-gray-700 p-4 flex items-center shadow-lg justify-between w-11/12 rounded-tl-xl">
           <div className="flex items-center">
-            <span className="text-sm font-bold">William</span>
+            <span className="text-lg font-bold">William</span>
           </div>
           <button>⚙️</button>
         </div>

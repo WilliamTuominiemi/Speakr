@@ -10,7 +10,7 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ base64 }) => {
   return (
-    <div className="w-full p-2 m-2 rounded-md bg-gray-700 outline outline-1 outline-slate-500">
+    <div className="w-11/12 p-2 m-2 rounded-md bg-gray-700 outline outline-1 outline-slate-500">
       <div className="flex items-center mb-2">
         <Image src="/icons/user.svg" alt="Profile Picture" className="w-7 h-7 rounded-full mr-2" width={5} height={5} />
         <h2 className="text-lg font-bold">Username</h2>
