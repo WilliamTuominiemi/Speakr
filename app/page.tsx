@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <main className="flex flex-col h-screen w-2/3 bg-gray-800 mx-auto relative ">
       <div className="flex flex-col justify-center items-center flex-1 overflow-y-scroll">
-        <h1 className="text-white mb-4">🗣️ Speakr</h1>
+        <h1 className="text-white mb-4 pt-14">🗣️ Speakr</h1>
         <p className="text-white mb-4">What others have to say:</p>
 
         {audios && (
@@ -82,39 +82,44 @@ export default function Home() {
         )}
       </div>
 
-      <div className="sticky bottom-0">
-        {error ? (
-          <p className="error-message">{error}</p>
-        ) : (
-          <div className="bg-gray-600 p-4 flex items-center space-x-2">
-            <p>Speak: </p>
-            <button
-              className="rounded-lg p-1 text-2xl bg-blue-500"
-              onClick={handleStartRecording}
-              disabled={isRecording}
-            >
-              🎙️
-            </button>
-            <button
-              className="rounded-lg p-1 text-2xl bg-blue-500"
-              onClick={handleStopRecording}
-              disabled={!isRecording}
-            >
-              🛑
-            </button>
+      <div className="sticky bottom-0 flex flex-col items-end">
+        <div className="bg-gray-600 p-4 w-11/12 rounded-tl-xl flex items-center space-x-5">
+          {error ? (
+            <p className="error-message">{error}</p>
+          ) : (
+            <>
+              <p>Speak: </p>
+              <button
+                className="rounded-lg p-1 text-2xl bg-blue-500"
+                onClick={handleStartRecording}
+                disabled={isRecording}
+              >
+                🎙️
+              </button>
+              <button
+                className="rounded-lg p-1 text-2xl bg-blue-500"
+                onClick={handleStopRecording}
+                disabled={!isRecording}
+              >
+                🛑
+              </button>
 
-            {audio && (
-              <div className="flex items-center space-x-2">
-                <audio src={audio} controls />
-                <button className="rounded-lg p-1 text-md bg-blue-500" type="button" onClick={uploadSound}>
-                  Upload↗️
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+              {audio && (
+                <>
+                  <div className="w-1/2">
+                    <audio src={audio} controls className="w-full" />
+                  </div>
 
-        <div className=" bg-gray-700 p-4 flex items-center justify-between">
+                  <button className="rounded-lg p-1 text-md bg-blue-500" type="button" onClick={uploadSound}>
+                    Upload↗️
+                  </button>
+                </>
+              )}
+            </>
+          )}
+        </div>
+
+        <div className=" bg-gray-700 p-4 flex items-center justify-between w-full">
           <div className="flex items-center">
             <span className="text-sm font-bold">William</span>
           </div>
