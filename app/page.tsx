@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtils';
 
+import Player from '@/components/Player';
+
 interface AudioData {
   id: string;
   base64: string;
@@ -75,7 +77,7 @@ export default function Home() {
           <div className="flex-1">
             {audios.map((audio) => (
               <div className="p-1" key={audio.id}>
-                <audio src={audio.base64} controls />
+                <Player base64={audio.base64} />
               </div>
             ))}
           </div>
@@ -106,9 +108,7 @@ export default function Home() {
 
               {audio && (
                 <>
-                  <div className="w-1/2">
-                    <audio src={audio} controls className="w-full" />
-                  </div>
+                  <Player base64={audio} />
 
                   <button className="rounded-lg p-1 text-md bg-blue-500" type="button" onClick={uploadSound}>
                     Upload↗️
