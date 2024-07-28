@@ -51,17 +51,15 @@ export const stopRecording = () => {
   });
 };
 
-const uint8ArrayToBase64 = (uint8Array: Uint8Array): string => {
-  let binaryString = '';
-  for (let i = 0; i < uint8Array.length; i++) {
-    binaryString += String.fromCharCode(uint8Array[i]);
-  }
-  return btoa(binaryString);
-};
-
-const convertBlobToBase64 = async (blob: Blob): Promise<string> => {
-  const arrayBuffer = await blob.arrayBuffer();
-  const uint8Array = new Uint8Array(arrayBuffer);
-  const compressedData = pako.deflate(uint8Array);
-  return uint8ArrayToBase64(new Uint8Array(compressedData));
+const convertBlobToBase64 = (blob: Blob): Promise<string> => {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = () => {
+      resolve(reader.result as string);
+    };
+    reader.onerror = (error) => {
+      reject(error);
+    };
+  });
 };
