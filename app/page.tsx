@@ -8,6 +8,7 @@ import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtil
 
 import Player from '@/components/Player';
 import Post from '@/components/Post';
+import SignInButton from '@/components/SignInButton';
 
 interface AudioData {
   id: string;
@@ -137,6 +138,7 @@ export default function Home() {
         <div className="bg-gray-700 p-4 flex items-center shadow-lg justify-between w-11/12 rounded-tl-xl rounded-br-lg">
           <div className="flex items-center">
             <span className="text-2xl font-bold">William</span>
+            <SignInButton />
           </div>
           <button className="text-lg">⚙️</button>
         </div>
