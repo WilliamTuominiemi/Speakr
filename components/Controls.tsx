@@ -6,7 +6,11 @@ import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtil
 
 import Player from '@/components/Player';
 
-const Controls = () => {
+interface ControlsProps {
+  userId: String;
+}
+
+const Controls: React.FC<ControlsProps> = ({ userId }) => {
   const [audio, setAudio] = useState<string | null>(null);
 
   const [error, setError] = useState<string | null>(null);
@@ -33,9 +37,8 @@ const Controls = () => {
     try {
       const response = await fetch('/api/new', {
         method: 'POST',
-        body: JSON.stringify({ audio }),
+        body: JSON.stringify({ userId, audio }),
       });
-
       if (response.ok) {
         if (audio) setAudio(null);
       } else {

@@ -16,7 +16,7 @@ export default function Home() {
       <main className="flex flex-col h-screen w-2/3 bg-gray-800 mx-auto relative rounded-lg">
         <Feed />
         <div className="sticky bottom-0 w-full flex flex-col items-end">
-          <Controls />
+          <Controls userId={session?.user.id} />
           <Toolbar username={session?.user.name} image={session?.user.image} />
         </div>
       </main>
