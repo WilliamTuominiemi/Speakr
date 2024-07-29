@@ -45,6 +45,7 @@ const Controls = () => {
       console.error('Error fetching:', error);
     }
   };
+
   return (
     <div className="bg-gray-600 p-4 w-10/12 rounded-tl-xl shadow-lg flex items-center space-x-5">
       {error ? (
