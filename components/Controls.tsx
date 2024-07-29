@@ -47,9 +47,9 @@ const Controls = () => {
   };
 
   return (
-    <div className="bg-gray-600 p-4 w-10/12 rounded-tl-xl shadow-lg flex items-center space-x-5">
+    <div className="bg-gray-600 p-4 w-10/12 min-h-20 rounded-tl-xl shadow-lg flex items-center space-x-5">
       {error ? (
-        <p className="error-message">{error}</p>
+        <p className="text-md error-message">{error}</p>
       ) : (
         <>
           <p className="text-xl">Say something: </p>
