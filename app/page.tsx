@@ -2,7 +2,7 @@
 
 import Feed from '@/components/Feed';
 import Controls from '@/components/Controls';
-import SignInButton from '@/components/SignInButton';
+import Toolbar from '@/components/Toolbar';
 
 export default function Home() {
   return (
@@ -17,13 +17,7 @@ export default function Home() {
 
       <div className="sticky bottom-0 w-full flex flex-col items-end">
         <Controls />
-        <div className="bg-gray-700 p-4 flex items-center shadow-lg justify-between w-11/12 rounded-tl-xl rounded-br-lg">
-          <div className="flex items-center">
-            <span className="text-2xl font-bold">William</span>
-            <SignInButton />
-          </div>
-          <button className="text-lg">⚙️</button>
-        </div>
+        <Toolbar />
       </div>
     </main>
   );
