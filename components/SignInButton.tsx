@@ -11,6 +11,7 @@ const SignInButton = () => {
           callbackUrl: '/',
         });
       }}
+      className="h-full bg-teal-700 hover:bg-teal-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     >
       Sign in
     </button>
