@@ -7,19 +7,11 @@ import Image from 'next/image';
 import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtils';
 
 import Player from '@/components/Player';
-import Post from '@/components/Post';
+import Feed from '@/components/Feed';
 import SignInButton from '@/components/SignInButton';
-
-interface AudioData {
-  id: string;
-  base64: string;
-  createdAt: string;
-}
 
 export default function Home() {
   const [audio, setAudio] = useState<string | null>(null);
-
-  const [audios, setAudios] = useState<AudioData[] | null>(null);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -27,21 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     getLocalStream(setError);
-    getAudios();
   }, []);
-
-  const getAudios = async () => {
-    try {
-      const response = await fetch('/api/audio');
-      if (!response.ok) {
-        throw new Error('Failed to fetch audios');
-      }
-      const data: AudioData[] = await response.json();
-      setAudios(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleStartRecording = () => {
     if (audio) setAudio(null);
@@ -63,7 +41,6 @@ export default function Home() {
       });
 
       if (response.ok) {
-        await getAudios();
         if (audio) setAudio(null);
       } else {
         console.error('Failed to upload audio');
@@ -80,14 +57,7 @@ export default function Home() {
           <h1 className="text-white text-3xl mb-4 pt-5">🗣️ Speakr</h1>
           <p className="text-white text-lg mb-4">What others have to say:</p>
         </div>
-
-        {audios && (
-          <div className="flex-1 w-1/2 overflow-y-auto">
-            {audios.map((audio) => (
-              <Post key={audio.id} base64={audio.base64} createdAt={audio.createdAt} />
-            ))}
-          </div>
-        )}
+        <Feed />
       </div>
 
       <div className="sticky bottom-0 w-full flex flex-col items-end">
