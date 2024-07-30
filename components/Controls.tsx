@@ -55,10 +55,11 @@ const Controls: React.FC<ControlsProps> = ({ userId }) => {
     <div className="bg-gray-600 p-4 w-10/12 min-h-20 rounded-tl-xl shadow-lg flex items-center space-x-5">
       {error ? (
         <p className="text-md error-message">{error}</p>
+      ) : !userId ? (
+        <p className="text-md error-message">You need to sign in to speak</p>
       ) : (
         <>
           <p className="text-xl">Say something: </p>
-
           {!isRecording ? (
             <button
               className="rounded-md p-3 pl-4 pr-4 h-full text-2xl bg-emerald-700 hover:bg-emerald-800"
@@ -68,21 +69,17 @@ const Controls: React.FC<ControlsProps> = ({ userId }) => {
               <Image src="/icons/microphone.svg" alt="Record" width={15} height={15} />
             </button>
           ) : (
-            <>
-              <button
-                className="rounded-md p-3 pl-4 pr-4 h-full text-2xl bg-red-500 hover:bg-red-600"
-                onClick={handleStopRecording}
-                disabled={!isRecording}
-              >
-                <Image src="/icons/microphone-line.svg" alt="Stop recording" width={15} height={15} />
-              </button>
-            </>
+            <button
+              className="rounded-md p-3 pl-4 pr-4 h-full text-2xl bg-red-500 hover:bg-red-600"
+              onClick={handleStopRecording}
+              disabled={!isRecording}
+            >
+              <Image src="/icons/microphone-line.svg" alt="Stop recording" width={15} height={15} />
+            </button>
           )}
-
           {audio && (
             <>
               <Player base64={audio} />
-
               <button
                 className="rounded-md pl-4 pr-4 h-full text-md bg-teal-500 hover:bg-teal-600"
                 type="button"
