@@ -5,6 +5,14 @@ const prisma = new PrismaClient();
 export const GET = async (req: NextRequest): Promise<NextResponse> => {
   try {
     const audios = await prisma.audio.findMany({
+      include: {
+        user: {
+          select: {
+            name: true,
+            image: true,
+          },
+        },
+      },
       orderBy: {
         createdAt: 'desc',
       },

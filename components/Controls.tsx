@@ -34,10 +34,12 @@ const Controls: React.FC<ControlsProps> = ({ userId }) => {
   };
 
   const uploadSound = async () => {
+    const obj = { userId: userId, audio: audio };
+
     try {
       const response = await fetch('/api/new', {
         method: 'POST',
-        body: JSON.stringify({ userId, audio }),
+        body: JSON.stringify(obj),
       });
       if (response.ok) {
         if (audio) setAudio(null);

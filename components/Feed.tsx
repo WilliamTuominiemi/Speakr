@@ -2,12 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import Post from '@/components/Post';
 
-// interface AudioData {
-//   id: string;
-//   base64: string;
-//   createdAt: string;
-// }
-
 const Feed = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ['repoData'],
@@ -26,9 +20,7 @@ const Feed = () => {
         {isPending && <p className="text-sm">Loading...</p>}
         {error && <p className="text-sm">An error has occurred: {error.message}</p>}
         {data && data.length === 0 && <p className="text-sm">No one has posted yet, be the first one.</p>}
-        {data &&
-          data.length > 0 &&
-          data.map((item) => <Post key={item.id} base64={item.base64} createdAt={item.createdAt} />)}
+        {data && data.length > 0 && data.map((item) => <Post key={item.id} post={item} />)}
       </div>
     </div>
   );

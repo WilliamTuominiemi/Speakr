@@ -8,11 +8,11 @@ datasource db {
 }
 
 model Audio {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   base64    String
-  userId    String  
-
-  createdAt DateTime @default(now())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String    @db.ObjectId
+  createdAt DateTime  @default(now())
 
   @@index([userId])
 }
@@ -52,6 +52,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  audios        Audio[]
   accounts      Account[]
   sessions      Session[]
 }

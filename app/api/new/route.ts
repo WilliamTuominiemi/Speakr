@@ -5,16 +5,16 @@ const prisma = new PrismaClient();
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
   try {
-    const { userId, audio } = (await req.json()) as { userId: string; audio: string };
+    const data = await req.json();
 
-    const testData = await prisma.audio.create({
+    const post = await prisma.audio.create({
       data: {
-        userId,
-        base64: audio,
+        base64: data.audio,
+        userId: data.userId,
       },
     });
 
-    return new NextResponse(JSON.stringify(testData), { status: 201 });
+    return new NextResponse(JSON.stringify(post), { status: 201 });
   } catch (error) {
     console.error(error);
     return new NextResponse('Failed to create', { status: 500 });
