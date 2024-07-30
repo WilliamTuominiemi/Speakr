@@ -17,7 +17,7 @@ export default function Home() {
         <Feed />
         <div className="sticky bottom-0 w-full flex flex-col items-end">
           <Controls userId={session?.user.id} />
-          <Toolbar username={session?.user.name} image={session?.user.image} />
+          <Toolbar status={status} username={session?.user.name} image={session?.user.image} />
         </div>
       </main>
     </QueryClientProvider>
