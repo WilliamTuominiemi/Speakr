@@ -22,7 +22,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
   const formattedTime = formatDistanceToNow(new Date(post.createdAt), { addSuffix: true });
 
   return (
-    <div className="w-11/12 p-2 m-2 rounded-md bg-gray-700 outline outline-1 outline-slate-500">
+    <div className="w-11/12 p-4 m-1 mb-5 rounded-md bg-gray-700 outline outline-1 outline-slate-500">
       <div className="flex items-center mb-2">
         <Image
           src={post.user.image}
