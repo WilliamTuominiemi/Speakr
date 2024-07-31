@@ -1,20 +1,18 @@
+// components/Controls.tsx
+
 import { useEffect, useState } from 'react';
-
 import Image from 'next/image';
-
 import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtils';
-
 import Player from '@/components/Player';
 
 interface ControlsProps {
-  userId: String;
+  userId: string;
+  refreshFeed: () => void;
 }
 
-const Controls: React.FC<ControlsProps> = ({ userId }) => {
+const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed }) => {
   const [audio, setAudio] = useState<string | null>(null);
-
   const [error, setError] = useState<string | null>(null);
-
   const [isRecording, setIsRecording] = useState<boolean>(false);
 
   useEffect(() => {
@@ -43,6 +41,7 @@ const Controls: React.FC<ControlsProps> = ({ userId }) => {
       });
       if (response.ok) {
         if (audio) setAudio(null);
+        refreshFeed();
       } else {
         console.error('Failed to upload audio');
       }

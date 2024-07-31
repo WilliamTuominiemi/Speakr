@@ -1,14 +1,20 @@
-import { useQuery } from '@tanstack/react-query';
-
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Post from '@/components/Post';
 
-const Feed = () => {
-  const { isPending, error, data } = useQuery({
+const Feed = ({ onRefresh }) => {
+  const queryClient = useQueryClient();
+  const { isPending, error, data, refetch } = useQuery({
     queryKey: ['repoData'],
     queryFn: () => fetch('/api/audio').then((res) => res.json()),
   });
 
-  console.log(data);
+  const refreshFeed = () => {
+    refetch();
+  };
+
+  if (onRefresh) {
+    onRefresh(refreshFeed);
+  }
 
   return (
     <div className="flex flex-col justify-center items-center flex-1 overflow-y-auto scrollbar-thin">
