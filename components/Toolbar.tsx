@@ -24,9 +24,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ status, username, image }) => {
         <span className="font-bold pl-10">Loading...</span>
       ) : (
         <>
-          <div className="flex items-center">
-            {username ? (
-              <>
+          {username ? (
+            <>
+              <div className="flex items-center">
                 <Image
                   src={image}
                   alt="Profile Picture"
@@ -35,14 +35,15 @@ const Toolbar: React.FC<ToolbarProps> = ({ status, username, image }) => {
                   height={50}
                 />
                 <span className="text-2xl font-bold">{username}</span>
-              </>
-            ) : (
-              <SignInButton />
-            )}
-          </div>
-          <button className="text-2xl" onClick={toggleMenu}>
-            ⚙️
-          </button>
+              </div>
+              <button className="text-2xl" onClick={toggleMenu}>
+                ⚙️
+              </button>
+            </>
+          ) : (
+            <SignInButton />
+          )}
+
           {isMenuOpen && (
             <div className="absolute bottom-full right-2 mb-2 bg-gray-700 border border-gray-300 rounded shadow-lg">
               <div className="p-2 flex flex-col text-lg">
