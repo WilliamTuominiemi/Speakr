@@ -43,10 +43,7 @@ const Player: React.FC<PlayerProps> = ({ base64 }) => {
   return (
     <div className="h-full mr-2">
       <audio ref={audioRef} src={base64} />
-      <button
-        className=" bg-emerald-600 hover:bg-emerald-700 p-3 pl-5 pr-5 h-full rounded-md "
-        onClick={handlePlayPause}
-      >
+      <button className=" bg-emerald-600 hover:bg-emerald-700 p-3 px-5 h-full rounded-md " onClick={handlePlayPause}>
         <Image src={src} alt="Stop" width={16} height={16} />
       </button>
     </div>
