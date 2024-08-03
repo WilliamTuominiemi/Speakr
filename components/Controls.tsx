@@ -13,6 +13,7 @@ const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed, reply }) => {
   const [audio, setAudio] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isRecording, setIsRecording] = useState<boolean>(false);
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     getLocalStream(setError);
@@ -22,10 +23,19 @@ const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed, reply }) => {
     if (audio) setAudio(null);
     setIsRecording(true);
     startRecording();
+
+    const id = setTimeout(async () => {
+      await handleStopRecording();
+    }, 10000);
+
+    setTimeoutId(id);
   };
 
   const handleStopRecording = async () => {
     setIsRecording(false);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
     const base64Audio = await stopRecording();
     setAudio(base64Audio);
   };
@@ -67,6 +77,7 @@ const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed, reply }) => {
       console.error('Error fetching:', error);
     }
   };
+
   return (
     <div className="bg-gray-600 p-4 w-10/12 min-h-20 rounded-tl-xl shadow-lg flex items-center space-x-5">
       {error ? (
