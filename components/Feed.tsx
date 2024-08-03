@@ -29,7 +29,7 @@ const Feed = ({ onRefresh, replying }) => {
         <h1 className="text-white text-3xl mb-4 pt-5">🗣️ Speakr</h1>
         <p className="text-white text-lg mb-4">What others have to say:</p>
       </div>
-      <div className="flex-1 w-1/3 overflow-y-auto p-4">
+      <div className="flex-1 w-2/5 overflow-y-auto p-4">
         {isPending && (
           <div className="flex flex-col space-y-6">
             <div className="h-20 bg-gray-500 rounded animate-pulse" />

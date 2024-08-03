@@ -72,7 +72,7 @@ const Post: React.FC<PostProps> = ({ post, onReplyClick }) => {
           onClick={toggleDropdown}
           disabled={post.replies.length == 0}
         >
-          <p className="text-xs mr-2">{post.replies.length} replie(s)</p>
+          <p className="text-xs mr-2">{post.replies.length} replies</p>
           <motion.div animate={{ rotate: isDropdownOpen ? 180 : 0 }} transition={{ duration: 0.5 }}>
             <Image src="/icons/dropdown.svg" alt="Dropdown" width={20} height={20} />
           </motion.div>
