@@ -1,5 +1,3 @@
-import pako from 'pako';
-
 let mediaRecorder: MediaRecorder;
 let audioChunks: Blob[] = [];
 
@@ -39,7 +37,7 @@ export const stopRecording = () => {
   return new Promise<string>((resolve, reject) => {
     if (mediaRecorder) {
       mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
         const base64String = await convertBlobToBase64(audioBlob);
         resolve(base64String);
       };
