@@ -18,7 +18,6 @@ export default function Home() {
   const handleReply = (postId: string) => {
     if (postId == reply) SetReply(null);
     else SetReply(postId);
-    console.log(`Reply button clicked for post: ${reply}`);
   };
 
   return (

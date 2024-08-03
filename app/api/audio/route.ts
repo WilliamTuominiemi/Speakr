@@ -21,6 +21,9 @@ export const GET = async (req: NextRequest): Promise<NextResponse> => {
               },
             },
           },
+          orderBy: {
+            createdAt: 'desc',
+          },
         },
       },
       orderBy: {
