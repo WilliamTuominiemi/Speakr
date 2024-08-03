@@ -68,10 +68,12 @@ const Post: React.FC<PostProps> = ({ post, onReplyClick }) => {
           <Image src="/icons/reply.svg" alt="Share" width={25} height={25} />
         </button>
         <button
-          className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-1 px-4 rounded-md ml-auto"
+          className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-1 px-4 rounded-md ml-auto flex items-center"
           onClick={toggleDropdown}
+          disabled={post.replies.length == 0}
         >
-          <motion.div className="ml-auto" animate={{ rotate: isDropdownOpen ? 180 : 0 }} transition={{ duration: 1 }}>
+          <p className="text-xs mr-2">{post.replies.length} replie(s)</p>
+          <motion.div animate={{ rotate: isDropdownOpen ? 180 : 0 }} transition={{ duration: 0.5 }}>
             <Image src="/icons/dropdown.svg" alt="Dropdown" width={20} height={20} />
           </motion.div>
         </button>
