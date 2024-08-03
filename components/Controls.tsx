@@ -49,6 +49,24 @@ const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed, reply }) => {
     }
   };
 
+  const uploadReply = async () => {
+    const obj = { audioId: reply, userId: userId, audio: audio };
+
+    try {
+      const response = await fetch('/api/reply', {
+        method: 'POST',
+        body: JSON.stringify(obj),
+      });
+      if (response.ok) {
+        if (audio) setAudio(null);
+        refreshFeed();
+      } else {
+        console.error('Failed to upload audio');
+      }
+    } catch (error) {
+      console.error('Error fetching:', error);
+    }
+  };
   return (
     <div className="bg-gray-600 p-4 w-10/12 min-h-20 rounded-tl-xl shadow-lg flex items-center space-x-5">
       {error ? (
@@ -83,7 +101,7 @@ const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed, reply }) => {
               <button
                 className="rounded-md pl-4 pr-4 h-full text-md bg-teal-500 hover:bg-teal-600"
                 type="button"
-                onClick={uploadSound}
+                onClick={reply ? uploadReply : uploadSound}
               >
                 <Image src="/icons/share.svg" alt="Share" width={15} height={15} />
               </button>

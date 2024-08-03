@@ -12,6 +12,16 @@ export const GET = async (req: NextRequest): Promise<NextResponse> => {
             image: true,
           },
         },
+        replies: {
+          include: {
+            user: {
+              select: {
+                name: true,
+                image: true,
+              },
+            },
+          },
+        },
       },
       orderBy: {
         createdAt: 'desc',

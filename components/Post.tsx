@@ -7,16 +7,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import Player from '@/components/Player';
 
+interface User {
+  name: string;
+  image: string;
+}
+
+interface Reply {
+  id: string;
+  base64: string;
+  createdAt: string;
+  userId: string;
+  user: User;
+}
+
 interface PostProps {
   post: {
     base64: string;
     createdAt: string;
     id: string;
     userId: string;
-    user: {
-      name: string;
-      image: string;
-    };
+    user: User;
+    replies: Reply[];
   };
   onReplyClick: (postId: string) => void;
 }
@@ -75,10 +86,30 @@ const Post: React.FC<PostProps> = ({ post, onReplyClick }) => {
             transition={{ duration: 0.5 }}
             className="overflow-hidden"
           >
-            <div className="mt-2 bg-gray-600 text-white p-2 rounded-md">
-              {/* Dropdown content goes here */}
-              Lots and lots of replies
-            </div>
+            {post.replies.length > 0 ? (
+              post.replies.map((reply) => (
+                <div key={reply.id} className="m-2 border-b border-gray-500 pb-2">
+                  <div className="flex items-center mb-1">
+                    <Image
+                      src={reply.user.image}
+                      alt="Reply Profile Picture"
+                      className="w-5 h-5 rounded-full mr-2"
+                      width={30}
+                      height={30}
+                    />
+                    <h2 className="text-sm font-semibold">{reply.user.name}</h2>
+                  </div>
+                  <div className="p-2 flex flex-row ">
+                    <Player base64={reply.base64} />
+                    <p className="text-gray-400 text-xs">
+                      Replied {formatDistanceToNow(new Date(reply.createdAt), { addSuffix: true })}
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No replies yet</p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
