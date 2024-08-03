@@ -21,7 +21,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ status, username, image }) => {
   return (
     <div className="bg-gray-700 p-4 min-h-20 flex items-center shadow-lg justify-between w-11/12 rounded-tl-xl rounded-br-lg">
       {status === 'loading' ? (
-        <span className="font-bold pl-10">Loading...</span>
+        <div className="flex items-center">
+          <div className="w-10 h-10 bg-gray-500 rounded-full mr-4 animate-pulse" />
+          <div className="w-32 h-6 bg-gray-500 rounded animate-pulse" />
+        </div>
       ) : (
         <>
           {username ? (
