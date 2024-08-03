@@ -18,11 +18,11 @@ interface PostProps {
       image: string;
     };
   };
+  onReplyClick: (postId: string) => void;
 }
 
-const Post: React.FC<PostProps> = ({ post }) => {
+const Post: React.FC<PostProps> = ({ post, onReplyClick }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isReplyOpen, setIsReplyOpen] = useState(false);
 
   const formattedTime = formatDistanceToNow(new Date(post.createdAt), { addSuffix: true });
 
@@ -31,7 +31,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
   };
 
   const toggleReply = () => {
-    setIsReplyOpen((prev) => !prev);
+    onReplyClick(post.id);
   };
 
   return (
@@ -54,11 +54,7 @@ const Post: React.FC<PostProps> = ({ post }) => {
           className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded-md"
           onClick={toggleReply}
         >
-          {isReplyOpen ? (
-            <Image src="/icons/close.svg" alt="Share" width={25} height={25} />
-          ) : (
-            <Image src="/icons/reply.svg" alt="Share" width={25} height={25} />
-          )}
+          <Image src="/icons/reply.svg" alt="Share" width={25} height={25} />
         </button>
         <button
           className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-1 px-4 rounded-md ml-auto"
@@ -69,23 +65,6 @@ const Post: React.FC<PostProps> = ({ post }) => {
           </motion.div>
         </button>
       </div>
-
-      <AnimatePresence>
-        {isReplyOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.5 }}
-            className="overflow-hidden"
-          >
-            <div className="mt-2 bg-gray-600 text-white p-2 rounded-md">
-              {/* Dropdown content goes here */}
-              reply
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <AnimatePresence>
         {isDropdownOpen && (

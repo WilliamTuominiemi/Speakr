@@ -1,5 +1,3 @@
-// components/Controls.tsx
-
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtils';
@@ -8,9 +6,10 @@ import Player from '@/components/Player';
 interface ControlsProps {
   userId: string;
   refreshFeed: () => void;
+  reply: string;
 }
 
-const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed }) => {
+const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed, reply }) => {
   const [audio, setAudio] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isRecording, setIsRecording] = useState<boolean>(false);
@@ -58,7 +57,9 @@ const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed }) => {
         <p className="text-md error-message">You need to sign in to speak</p>
       ) : (
         <>
-          <p className="text-xl">Say something: </p>
+          <p className="text-xl">
+            {reply ? <>Replying to post {reply.slice(reply.length - 5, reply.length)}</> : <>Say something:</>}
+          </p>
           {!isRecording ? (
             <button
               className="rounded-md p-3 pl-4 pr-4 h-full text-2xl bg-emerald-700 hover:bg-emerald-800"
