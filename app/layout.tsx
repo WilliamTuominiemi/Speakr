@@ -9,13 +9,7 @@ export const metadata: Metadata = {
   description: 'Audio forum',
 };
 
-export default function RootLayout({
-  children,
-  session,
-}: Readonly<{
-  children: React.ReactNode;
-  session: any;
-}>) {
+export default function RootLayout({ children, session }: { children: React.ReactNode; session: any }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
