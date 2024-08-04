@@ -48,11 +48,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ status, username, image }) => {
           )}
 
           {isMenuOpen && (
-            <div className="absolute bottom-full right-2 mb-2 bg-slate-300 dark:bg-gray-700 border border-gray-300 rounded shadow-lg">
-              <div className="p-2 flex flex-col text-lg">
+            <div className="absolute bottom-full right-2 mb-2 bg-zinc-300 dark:bg-gray-700 border border-gray-300 rounded shadow-lg">
+              <div className="p-2 flex flex-col text-lg content-center items-center space-y-2">
                 <SignOutButton />
                 <ThemeSwitch />
-                <button>Settings</button>
               </div>
             </div>
           )}
