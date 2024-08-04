@@ -44,7 +44,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ status, username, image }) => {
               <FiSettings onClick={toggleMenu} />
             </>
           ) : (
-            <SignInButton />
+            <>
+              <SignInButton />
+              <ThemeSwitch />
+            </>
           )}
 
           {isMenuOpen && (
