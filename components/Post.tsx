@@ -46,7 +46,7 @@ const Post: React.FC<PostProps> = ({ post, onReplyClick }) => {
   };
 
   return (
-    <div className="w-11/12 p-4 m-1 mb-5 rounded-md bg-gray-700 outline outline-1 outline-slate-500">
+    <div className="w-11/12 p-4 m-1 mb-5 rounded-md bg-stone-200 dark:bg-gray-700 outline outline-1 outline-slate-500">
       <div className="flex items-center mb-2">
         <Image
           src={post.user.image}

@@ -15,25 +15,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    function ({ addUtilities }) {
-      const newUtilities = {
-        '.scrollbar-thin': {
-          '::-webkit-scrollbar': {
-            width: '4px',
-            height: '4px',
-          },
-          '::-webkit-scrollbar-thumb': {
-            backgroundColor: '#4A5568', // Change to desired thumb color
-            borderRadius: '9999px',
-          },
-          '::-webkit-scrollbar-track': {
-            backgroundColor: '#2D3748', // Change to desired track color
-          },
-        },
-      };
-      addUtilities(newUtilities, ['responsive', 'hover']);
-    },
-  ],
+  plugins: [],
+  darkMode: 'class',
 };
 export default config;

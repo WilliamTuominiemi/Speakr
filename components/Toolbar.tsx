@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
 import Image from 'next/image';
+import { FiSettings } from 'react-icons/fi';
 
 import SignInButton from '@/components/SignInButton';
 import SignOutButton from '@/components/SignOutButton';
+import ThemeSwitch from '@/components/ThemeSwitch';
 
 interface ToolbarProps {
   status: string;
@@ -19,7 +21,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ status, username, image }) => {
   };
 
   return (
-    <div className="bg-gray-700 p-4 min-h-20 flex items-center shadow-lg justify-between w-11/12 rounded-tl-xl rounded-br-lg">
+    <div className="bg-zinc-300 dark:bg-gray-700 outline outline-1 outline-zinc-400 p-4 min-h-20 flex items-center shadow-lg justify-between w-11/12 rounded-tl-xl rounded-br-lg">
       {status === 'loading' ? (
         <div className="flex items-center">
           <div className="w-10 h-10 bg-gray-500 rounded-full mr-4 animate-pulse" />
@@ -39,18 +41,17 @@ const Toolbar: React.FC<ToolbarProps> = ({ status, username, image }) => {
                 />
                 <span className="text-2xl font-bold">{username}</span>
               </div>
-              <button className="text-2xl" onClick={toggleMenu}>
-                ⚙️
-              </button>
+              <FiSettings onClick={toggleMenu} />
             </>
           ) : (
             <SignInButton />
           )}
 
           {isMenuOpen && (
-            <div className="absolute bottom-full right-2 mb-2 bg-gray-700 border border-gray-300 rounded shadow-lg">
+            <div className="absolute bottom-full right-2 mb-2 bg-slate-300 dark:bg-gray-700 border border-gray-300 rounded shadow-lg">
               <div className="p-2 flex flex-col text-lg">
                 <SignOutButton />
+                <ThemeSwitch />
                 <button>Settings</button>
               </div>
             </div>

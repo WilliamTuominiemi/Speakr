@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <main className="flex flex-col h-screen w-2/3 bg-gray-800 mx-auto relative rounded-lg">
+      <main className="flex flex-col h-screen w-2/3 bg-slate-100 text-black dark:bg-gray-800 dark:text-white  mx-auto relative rounded-lg">
         <Feed onRefresh={(refreshFeed) => (refreshFeedRef.current = refreshFeed)} replying={handleReply} />
         <div className="sticky bottom-0 w-full flex flex-col items-end">
           <Controls userId={session?.user.id} refreshFeed={() => refreshFeedRef.current()} reply={reply} />

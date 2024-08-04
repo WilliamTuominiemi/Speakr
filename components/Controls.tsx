@@ -79,7 +79,7 @@ const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed, reply }) => {
   };
 
   return (
-    <div className="bg-gray-600 p-4 w-10/12 min-h-20 rounded-tl-xl shadow-lg flex items-center space-x-5">
+    <div className="bg-stone-300 dark:bg-gray-600 outline outline-1 outline-zinc-400 p-4 w-10/12 min-h-20 rounded-tl-xl shadow-lg flex items-center space-x-5">
       {error ? (
         <p className="text-md error-message">{error}</p>
       ) : !userId ? (
