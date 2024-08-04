@@ -7,7 +7,7 @@
 @tailwind utilities;
 
 body {
-  --foreground-rgb: 0, 0, 0;
+  --foreground-rgb: 50, 50, 50;
   --background-start-rgb: 230, 230, 250;
   --background-end-rgb: 240, 240, 240;
   color: rgb(var(--foreground-rgb));
