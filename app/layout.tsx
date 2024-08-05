@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
-import Provider from '@/components/Provider';
+import { Session } from 'next-auth';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
@@ -9,13 +9,11 @@ export const metadata: Metadata = {
   description: 'Audio forum',
 };
 
-export default function RootLayout({ children, session }: { children: React.ReactNode; session: any }) {
+export default function RootLayout({ children, session }: { children: React.ReactNode; session?: Session; }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <Provider session={session}>
-          <Providers>{children}</Providers>
-        </Provider>
+        <Providers session={session}>{children}</Providers>
       </body>
     </html>
   );

@@ -1,8 +1,7 @@
 import { prisma } from '@/lib/db';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { NextAuthOptions, getServerSession } from 'next-auth';
+import { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { cache } from 'react';
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
@@ -26,8 +25,3 @@ export const authOptions: NextAuthOptions = {
     brandColor: '#3b82f6',
   },
 };
-
-export const getCurrentUser = cache(async () => {
-  const session = await getServerSession(authOptions);
-  return session?.user;
-});
