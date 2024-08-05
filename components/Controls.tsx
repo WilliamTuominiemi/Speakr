@@ -1,19 +1,50 @@
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { getLocalStream, startRecording, stopRecording } from '@/utils/mediaUtils';
+'use client';
 import Player from '@/components/Player';
+import {
+  getLocalStream,
+  startRecording,
+  stopRecording,
+} from '@/utils/mediaUtils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 interface ControlsProps {
   userId: string;
-  refreshFeed: () => void;
   reply: string;
 }
 
-const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed, reply }) => {
+const Controls: React.FC<ControlsProps> = ({ userId, reply }) => {
+  const queryClient = useQueryClient();
+
   const [audio, setAudio] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+
+  const postMutation = useMutation({
+    mutationFn: () =>
+      fetch('/api/new', {
+        method: 'POST',
+        body: JSON.stringify({ userId, audio }),
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      setAudio(null);
+    },
+  });
+
+  const replyMutation = useMutation({
+    mutationFn: () =>
+      fetch('/api/reply', {
+        method: 'POST',
+        body: JSON.stringify({ userId, audioId: reply, audio }),
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      setAudio(null);
+    },
+  });
 
   useEffect(() => {
     getLocalStream(setError);
@@ -40,42 +71,12 @@ const Controls: React.FC<ControlsProps> = ({ userId, refreshFeed, reply }) => {
     setAudio(base64Audio);
   };
 
-  const uploadSound = async () => {
-    const obj = { userId: userId, audio: audio };
-
-    try {
-      const response = await fetch('/api/new', {
-        method: 'POST',
-        body: JSON.stringify(obj),
-      });
-      if (response.ok) {
-        if (audio) setAudio(null);
-        refreshFeed();
-      } else {
-        console.error('Failed to upload audio');
-      }
-    } catch (error) {
-      console.error('Error fetching:', error);
-    }
+  const uploadSound = () => {
+    postMutation.mutate();
   };
 
-  const uploadReply = async () => {
-    const obj = { audioId: reply, userId: userId, audio: audio };
-
-    try {
-      const response = await fetch('/api/reply', {
-        method: 'POST',
-        body: JSON.stringify(obj),
-      });
-      if (response.ok) {
-        if (audio) setAudio(null);
-        refreshFeed();
-      } else {
-        console.error('Failed to upload audio');
-      }
-    } catch (error) {
-      console.error('Error fetching:', error);
-    }
+  const uploadReply = () => {
+    replyMutation.mutate();
   };
 
   return (

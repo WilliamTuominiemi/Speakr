@@ -1,23 +1,11 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Post from '@/components/Post';
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
-const Feed = ({ onRefresh, replying }) => {
-  const [replyPostId, setReplyPostId] = useState<string | null>(null);
-
-  const queryClient = useQueryClient();
-  const { isPending, error, data, refetch } = useQuery({
-    queryKey: ['repoData'],
+const Feed = ({ replying }) => {
+  const { isPending, error, data } = useQuery({
+    queryKey: ['posts'],
     queryFn: () => fetch('/api/audio').then((res) => res.json()),
   });
-
-  const refreshFeed = () => {
-    refetch();
-  };
-
-  if (onRefresh) {
-    onRefresh(refreshFeed);
-  }
 
   const handleReplyClick = (postId: string) => {
     replying(postId);
