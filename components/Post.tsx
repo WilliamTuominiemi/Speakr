@@ -62,7 +62,7 @@ const Post: React.FC<PostProps> = ({ post, onReplyClick }) => {
       <div className="flex">
         <Player base64={post.base64} />
         <button
-          className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 rounded-md"
+          className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-1 px-4 mr-2 rounded-md"
           onClick={toggleReply}
         >
           <Image src="/icons/reply.svg" alt="Share" width={25} height={25} />
