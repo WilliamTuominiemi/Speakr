@@ -46,6 +46,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ status, username, image }) => {
           ) : (
             <>
               <SignInButton />
+              <Link href="https://github.com/WilliamTuominiemi/Speakr">GitHub</Link>
               <ThemeSwitch />
             </>
           )}
